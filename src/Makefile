@@ -67,8 +67,8 @@ lammpsscanner.o: lammpsscanner.cpp
 gpuljintegrator.o: gpuljintegrator.hip
 	$(HIPC) $(HIPCFLAGS) -c gpuljintegrator.hip
 
-cudaljintegrator.o: gpuljintegrator.cu
-	$(HIPC) $(HIPCFLAGS) -c gpuljintegrator.cu -o cudaljintegrator.o
+cudaljintegrator.o: cudagpuljintegrator.cu
+	$(CUDAC) $(CUDACFLAGS) -c cudagpuljintegrator.cu
 
 simpleljintegrator.o: simpleljintegrator.cpp
 	$(CXX) $(CXXFLAGS) -c simpleljintegrator.cpp
