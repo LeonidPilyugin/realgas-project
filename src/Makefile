@@ -23,7 +23,7 @@ CXX = g++
 # AMD HIP compiler
 HIPC = hipcc
 # CUDA compiler
-CUDAC = nvcc
+CUDAC = /opt/cuda/bin/nvcc
 # C++ compiler flags
 CXXFLAGS = -I../include
 # AMD HIP compiler flags
@@ -43,8 +43,8 @@ cpu: main-cpu.o lammpssaver.o lammpsscanner.o simpleljintegrator.o vector.o inte
 gpu: main-gpu.o lammpssaver.o lammpsscanner.o gpuljintegrator.o vector.o  integrator.o ljintegrator.o
 	$(HIPC) $(HIPCFLAGS) -o $(GPUNAME) main-gpu.o lammpssaver.o lammpsscanner.o gpuljintegrator.o vector.o  integrator.o ljintegrator.o -l:libboost_program_options.so
 
-cuda: main-gpu.o lammpssaver.o lammpsscanner.o cudaljintegrator.o vector.o  integrator.o ljintegrator.o
-	$(CUDAC) $(CUDACFLAGS) -o $(GPUNAME) main-gpu.o lammpssaver.o lammpsscanner.o cudaljintegrator.o vector.o  integrator.o ljintegrator.o -l:libboost_program_options.so
+cuda: main-gpu.o lammpssaver.o lammpsscanner.o cudagpuljintegrator.o vector.o  integrator.o ljintegrator.o
+	$(CUDAC) $(CUDACFLAGS) -o $(GPUNAME) main-gpu.o lammpssaver.o lammpsscanner.o cudagpuljintegrator.o vector.o  integrator.o ljintegrator.o -l:libboost_program_options.so
 
 main-gpu.o: main.cpp
 	$(CXX) $(CXXFLAGS) -DGPU -c main.cpp -o main-gpu.o
@@ -67,7 +67,7 @@ lammpsscanner.o: lammpsscanner.cpp
 gpuljintegrator.o: gpuljintegrator.hip
 	$(HIPC) $(HIPCFLAGS) -c gpuljintegrator.hip
 
-cudaljintegrator.o: cudagpuljintegrator.cu
+cudagpuljintegrator.o: cudagpuljintegrator.cu
 	$(CUDAC) $(CUDACFLAGS) -c cudagpuljintegrator.cu
 
 simpleljintegrator.o: simpleljintegrator.cpp
