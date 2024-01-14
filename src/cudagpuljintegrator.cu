@@ -183,6 +183,7 @@ void GpuLjIntegrator::Run(uint64_t steps, uint64_t dump, float dt) {
     cudaMemcpy(vps[0], v_host, n * sizeof(float4), cudaMemcpyHostToDevice);
 
     // run
+    uint64_t j;
     for (uint64_t i = 0, j = 0; i < steps; i++, j = 1 - j) {
         // move particles
         //hipLaunchKernelGGL(MoveBodies, dim3(n / BLOCK), dim3(BLOCK), 0, 0, pps[1-j],
