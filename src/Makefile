@@ -23,7 +23,7 @@ CXX = g++
 # AMD HIP compiler
 HIPC = hipcc
 # CUDA compiler
-CUDAC = /opt/cuda/bin/nvcc
+CUDAC = nvcc
 # C++ compiler flags
 CXXFLAGS = -I../include
 # AMD HIP compiler flags
