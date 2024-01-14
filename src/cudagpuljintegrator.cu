@@ -198,7 +198,7 @@ void GpuLjIntegrator::Run(uint64_t steps, uint64_t dump, float dt) {
         
         // dump if necessary
         if (i % dump == 0) {
-            cudaMemcpy(p_host, pps[1-j], n * sizeof(float4), cudapMemcpyDeviceToHost);
+            cudaMemcpy(p_host, pps[1-j], n * sizeof(float4), cudaMemcpyDeviceToHost);
             cudaMemcpy(v_host, vps[1-j], n * sizeof(float4), cudaMemcpyDeviceToHost);
             for (uint64_t k = 0; k < environment.system.size(); k++) {
                 Particle &p = environment.system[k];
